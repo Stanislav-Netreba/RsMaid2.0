@@ -77,7 +77,7 @@ bot.onText(/\/remove(@\w+)?/, async (msg) => {
 });
 
 bot.onText(/\/ping(@\w+)?/, async (msg) => {
-	await msg.sendMessage(msg.chat.id, 'pong');
+	await bot.sendMessage(msg.chat.id, 'pong');
 });
 
 // --- callback кнопки ---

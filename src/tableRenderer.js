@@ -1,8 +1,17 @@
 const nodeHtmlToImage = require('node-html-to-image');
+const os = require('os');
 const { pairTimes, days } = require('./icsParser');
 const { getCurrentPairIndex } = require('./timeUtils');
 
 async function renderScheduleBuffer(weekData) {
+	if (os.platform() === 'linux' && os.arch().startsWith('arm')) {
+		// Raspberry Pi
+		puppeteerArgs = {
+			executablePath: '/usr/bin/chromium-browser', // перевір через: which chromium-browser
+			args: ['--no-sandbox', '--disable-setuid-sandbox'],
+		};
+	}
+
 	const rowCount = pairTimes.length;
 	const headerHeight = 60;
 	const imageWidth = 1920;
@@ -98,6 +107,7 @@ async function renderScheduleBuffer(weekData) {
 		quality: 100,
 		width: imageWidth,
 		height: imageHeight,
+		puppeteerArgs,
 	});
 }
 
