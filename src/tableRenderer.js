@@ -4,6 +4,8 @@ const { pairTimes, days } = require('./icsParser');
 const { getCurrentPairIndex } = require('./timeUtils');
 
 async function renderScheduleBuffer(weekData) {
+	let puppeteerArgs;
+
 	if (os.platform() === 'linux' && os.arch().startsWith('arm')) {
 		// Raspberry Pi
 		puppeteerArgs = {
